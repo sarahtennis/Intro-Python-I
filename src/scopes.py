@@ -5,12 +5,13 @@
 x = 12
 
 def changeX():
+    global x # gives access to global variables
     x = 99
 
 changeX()
 
 # This prints 12. What do we have to modify in changeX() to get it to print 99?
-print(x)
+print(x) # Output: 99 (after adding global x)
 
 
 # This nested function has a similar problem.
@@ -19,12 +20,13 @@ def outer():
     y = 120
 
     def inner():
+        nonlocal y
         y = 999
 
     inner()
 
     # This prints 120. What do we have to change in inner() to get it to print
     # 999? Google "python nested function scope".
-    print(y)
+    print(y) # Output: 999 (after adding nonlocal y)
 
 outer()
