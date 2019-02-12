@@ -5,6 +5,11 @@
 # the sum. This is what you'd consider to be a regular, normal function.
 
 # YOUR CODE HERE
+def f1(num1, num2):
+    if float(num1).is_integer() and float(num2).is_integer():
+        return int(num1) + int(num2)
+    else:
+        return "Invalid input"
 
 print(f1(1, 2))
 
@@ -13,25 +18,60 @@ print(f1(1, 2))
 
 # YOUR CODE HERE
 
+def f2(*integers):
+    # return sum(integers)
+
+    sum = 0
+    for integer in integers:
+        if isinstance(integer, list) or isinstance(integer, tuple):
+            for list_int in integer:
+                sum += list_int
+        elif float(integer).is_integer():
+            sum += integer
+        else:
+            return "Cannot sum"
+    return sum
+
 print(f2(1))                    # Should print 1
 print(f2(1, 3))                 # Should print 4
 print(f2(1, 4, -12))            # Should print -7
 print(f2(7, 9, 1, 3, 4, 9, 0))  # Should print 33
 
 a = [7, 6, 5, 4]
+b = (1, 2, 3, 4)
 
 # What thing do you have to add to make this work?
 print(f2(a))    # Should print 22
+print(f2(b))    # Should print 10
 
 # Write a function f3 that accepts either one or two arguments. If one argument,
 # it returns that value plus 1. If two arguments, it returns the sum of the
 # arguments. Google "python default arguments" for a hint.
 
 # YOUR CODE HERE
+import numbers
+
+# return number value of argument else false
+# used for number strings
+def be_the_number(value):
+    try:
+        return int(value)
+    except ValueError:
+        try:
+            return float(value)
+        except:
+            return False
+
+def f3(num1, num2 = 1):
+        if be_the_number(num1) and be_the_number(num2):
+            return be_the_number(num1) + be_the_number(num2)
+        else:
+            return "NOO!!"
 
 print(f3(1, 2))  # Should print 3
 print(f3(8))     # Should print 9
-
+print(f3('hi'))  # Should print NOO!!
+print(f3('3', 2))# Should print 5
 
 # Write a function f4 that accepts an arbitrary number of keyword arguments and
 # prints ouf the keys and values like so:
@@ -41,7 +81,13 @@ print(f3(8))     # Should print 9
 #
 # Google "python keyword arguments".
 
-# YOUR CODE HERE
+def f4(positional = None, **args):
+    if not not positional:
+        for key, argument in positional.items():
+            print(f"key: {key}, value: {argument}")
+
+    for key, argument in args.items():
+        print(f"key: {key}, value: {argument}")
 
 # Should print
 # key: a, value: 12
