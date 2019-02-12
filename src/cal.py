@@ -22,3 +22,16 @@ and does the following:
 import sys
 import calendar
 from datetime import datetime
+
+num_args = len(sys.argv)
+today = datetime.now()
+
+try:
+  if num_args == 1:
+    print(calendar.TextCalendar().formatmonth(int(today.year), int(today.month)))
+  elif num_args == 2:
+    print(calendar.TextCalendar().formatmonth(int(today.year), int(sys.argv[1])))
+  else:
+    print(calendar.TextCalendar().formatmonth(int(sys.argv[2]), int(sys.argv[1])))
+except:
+  print("Must format command line arguments as " + '\033[1m' + '\033[91m' + "calendar.py month year" + '\033[0m' + ", where month (1 - 12) and year are integers.")
